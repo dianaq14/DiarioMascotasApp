@@ -1,8 +1,6 @@
-# PETPLANNER
+# PetPlanner
 
 Está pensada especialmente para llevar el control veterinario de los queridos animalitos de la casa 🐱🐶🐴🐰🦦🦔
-
-# PetPlanner
 
 **PetPlanner** es una aplicación móvil que ayuda a los dueños de mascotas a gestionar la información de sus animales y programar recordatorios para las visitas veterinarias. La aplicación permite añadir múltiples mascotas, registrar detalles como nombre, especie, raza, y fecha de nacimiento, y visualizar las visitas veterinarias pasadas y futuras.
 
