@@ -12,12 +12,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.diana.diariomascotasapp.data.repository.MascotaRepository
+import com.diana.diariomascotasapp.data.Repository.RecordatorioRepository
 import com.diana.diariomascotasapp.ui.screen.HomeScreen
+import com.diana.diariomascotasapp.ui.screen.RecordatorioListScreen
 import com.diana.diariomascotasapp.ui.screen.WelcomeScreen
 import com.diana.diariomascotasapp.ui.theme.PetPlannerTheme
 import com.diana.diariomascotasapp.viewModel.MascotaViewModel
 import com.diana.diariomascotasapp.viewModel.MascotaViewModelFactory
-import com.diana.diariomascotasapp.data.dao.MascotaDatabase
+import com.diana.diariomascotasapp.viewModel.RecordatorioViewModel
+import com.diana.diariomascotasapp.viewModel.RecordatorioViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -26,22 +29,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Obtener la instancia de la base de datos y el DAO
-        val database = MascotaDatabase.getDatabase(applicationContext)
-        val mascotaDao = database.mascotaDao()
-
-        // Crear instancia del repositorio y ViewModelFactory
-        val mascotaRepository = MascotaRepository(mascotaDao)
+        val mascotaRepository = MascotaRepository()
         val mascotaViewModelFactory = MascotaViewModelFactory(mascotaRepository)
 
-        // Configurar el contenido
+        val recordatorioRepository = RecordatorioRepository()
+        val recordatorioViewModelFactory = RecordatorioViewModelFactory(recordatorioRepository)
+
         setContent {
-            PetPlannerTheme(darkTheme = true) { // Modo oscuro predeterminado
+            PetPlannerTheme(darkTheme = true) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Configurar el controlador de navegación
                     navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "welcome") {
                         composable("welcome") {
@@ -52,10 +51,23 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("home") {
+                            // Crear ViewModel fuera de la composición para evitar problemas
+                            val mascotaViewModel = mascotaViewModelFactory.create(MascotaViewModel::class.java)
                             HomeScreen(
-                                mascotaViewModel = mascotaViewModelFactory.create(MascotaViewModel::class.java),
-                                onNavigateToVisitas = {
-                                    // Implementa la navegación a otras pantallas si es necesario
+                                mascotaViewModel = mascotaViewModel,
+                                onNavigateToVisitas = { mascotaId ->
+                                    navController.navigate("recordatorios/$mascotaId")
+                                }
+                            )
+                        }
+                        composable("recordatorios/{mascotaId}") { backStackEntry ->
+                            val mascotaId = backStackEntry.arguments?.getString("mascotaId") ?: ""
+                            val recordatorioViewModel = recordatorioViewModelFactory.create(RecordatorioViewModel::class.java)
+                            RecordatorioListScreen(
+                                mascotaId = mascotaId,
+                                viewModel = recordatorioViewModel,
+                                onEliminarClick = { recordatorioId ->
+                                    recordatorioViewModel.eliminarRecordatorio(recordatorioId, mascotaId)
                                 }
                             )
                         }

@@ -9,5 +9,11 @@ data class Mascota(
     val nombre: String,
     val especie: String,
     val raza: String,
-    val fechaNacimiento: String
+    val fechaNacimiento: String,
+    val edad: Int,
+    val historia: String,
+    val peso: Double,
+    val sexo: String,
+    val tutor: String,
+    val fotoUri: String? = null
 )

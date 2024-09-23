@@ -1,15 +1,14 @@
-package com.diana.diariomascotasapp.data.dao
+package com.diana.diariomascotasapp.data.database
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.diana.diariomascotasapp.data.dao.MascotaDao
 import com.diana.diariomascotasapp.data.model.Mascota
+import android.content.Context
 
 @Database(entities = [Mascota::class], version = 1)
 abstract class MascotaDatabase : RoomDatabase() {
-
     abstract fun mascotaDao(): MascotaDao
 
     companion object {

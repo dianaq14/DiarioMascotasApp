@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -51,6 +53,14 @@ android {
 }
 
 dependencies {
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
+    implementation ("com.google.firebase:firebase-firestore-ktx")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-database-ktx:20.3.0")
+    implementation ("com.google.firebase:firebase-core:21.1.1")
+
+
     // Dependencias principales
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -61,8 +71,15 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    implementation("io.coil-kt:coil-compose:2.2.2")
+
+
+
     // Room para la base de datos local
     implementation("androidx.room:room-runtime:2.6.0")
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.runtime.livedata)
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
 
@@ -86,6 +103,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.5.1")
     implementation("androidx.compose.material:material:1.5.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.1")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.0")
 
     // Otros componentes de Jetpack Compose que estés usando
     implementation ("androidx.navigation:navigation-compose:2.7.0") 
@@ -97,4 +115,11 @@ dependencies {
 
     //navigation
     implementation ("androidx.navigation:navigation-compose:2.5.3")
+
+    // ViewModel support with Compose
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
+
+    // StateFlow & Coroutines (si es necesario)
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }

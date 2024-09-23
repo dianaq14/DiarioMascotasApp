@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914794282504",
+    "project_id": "petplanner-1d243",
+    "storage_bucket": "petplanner-1d243.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914794282504:android:d8e001b365a4b53e695bbd",
+        "android_client_info": {
+          "package_name": "com.diana.diariomascotasapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbLOHZoCIUDstyS2HjEkthjyHVPg49bZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

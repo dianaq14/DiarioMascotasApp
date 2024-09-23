@@ -1,18 +1,47 @@
 package com.diana.diariomascotasapp.data.repository
 
-import com.diana.diariomascotasapp.data.dao.MascotaDao
 import com.diana.diariomascotasapp.data.model.Mascota
-import kotlinx.coroutines.flow.Flow
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
-class MascotaRepository(private val mascotaDao: MascotaDao) {
+class MascotaRepository {
 
-    // Método para obtener una lista de mascotas
-    fun getMascotas(): Flow<List<Mascota>> {
-        return mascotaDao.getAllMascotas() // Retorna el Flow de la base de datos
+    private val firestore = FirebaseFirestore.getInstance()
+    private val mascotasCollection = firestore.collection("mascotas")
+
+    suspend fun addMascota(mascota: Mascota) {
+        try {
+            mascotasCollection.add(mascota).await()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    // Método para agregar una nueva mascota
-    suspend fun addMascota(mascota: Mascota) {
-        mascotaDao.insertMascota(mascota) // Agrega la mascota a la base de datos
+    suspend fun getMascotas(): List<Mascota> {
+        return try {
+            val snapshot = mascotasCollection.get().await()
+            snapshot.documents.mapNotNull { document ->
+                document.toObject(Mascota::class.java)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
+    suspend fun updateMascota(id: String, mascota: Mascota) {
+        try {
+            mascotasCollection.document(id).set(mascota).await()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun deleteMascota(id: String) {
+        try {
+            mascotasCollection.document(id).delete().await()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
