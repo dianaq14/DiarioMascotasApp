@@ -70,25 +70,31 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation("io.coil-kt:coil-compose:2.2.2")
+
+    implementation ("com.google.firebase:firebase-firestore-ktx")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+
 
 
 
     // Room para la base de datos local
-    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("androidx.room:room-runtime:2.6.1")
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.database.ktx)
     implementation(libs.androidx.runtime.livedata)
-    kapt("androidx.room:room-compiler:2.6.0")
-    implementation("androidx.room:room-ktx:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 
     // WorkManager para recordatorios y tareas en segundo plano
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 
     // ViewModel y LiveData para gestión de estados
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+
 
     // Testing
     testImplementation(libs.junit)
@@ -100,26 +106,26 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Jetpack Compose
-    implementation("androidx.compose.ui:ui:1.5.1")
-    implementation("androidx.compose.material:material:1.5.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.1")
+    implementation("androidx.compose.ui:ui:1.7.2")
+    implementation("androidx.compose.material:material:1.7.2")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.7.2")
     implementation ("androidx.compose.runtime:runtime-livedata:1.5.0")
 
     // Otros componentes de Jetpack Compose que estés usando
-    implementation ("androidx.navigation:navigation-compose:2.7.0") 
+    implementation ("androidx.navigation:navigation-compose:2.8.1")
 
 
     // Para usar Compose en un proyecto de Kotlin Multiplatform
-    implementation("androidx.compose.ui:ui-util:1.5.1")
-    implementation("androidx.compose.runtime:runtime:1.5.1")
+    implementation("androidx.compose.ui:ui-util:1.7.2")
+    implementation("androidx.compose.runtime:runtime:1.7.2")
 
     //navigation
-    implementation ("androidx.navigation:navigation-compose:2.5.3")
+    implementation ("androidx.navigation:navigation-compose:2.8.1")
 
     // ViewModel support with Compose
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
 
     // StateFlow & Coroutines (si es necesario)
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }

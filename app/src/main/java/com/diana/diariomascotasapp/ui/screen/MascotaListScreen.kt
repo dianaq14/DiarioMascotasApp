@@ -34,9 +34,9 @@ fun MascotaListScreen(mascotaViewModel: MascotaViewModel = viewModel(), onMascot
                 Icon(Icons.Default.Add, contentDescription = "Agregar Mascota")
             }
         }
-    ) {
+    ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.padding(it),
+            modifier = Modifier.padding(innerPadding),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -65,12 +65,7 @@ fun MascotaItem(mascota: Mascota, onClick: (Mascota) -> Unit) {
             Text(text = "Nombre: ${mascota.nombre}", style = TextStyle(fontSize = 18.sp, fontFamily = FontFamily.Serif))
             Text(text = "Especie: ${mascota.especie}", style = TextStyle(fontSize = 16.sp, fontFamily = FontFamily.Serif))
             Text(text = "Raza: ${mascota.raza}", style = TextStyle(fontSize = 16.sp, fontFamily = FontFamily.Serif))
-            Text(text = "Fecha de Nacimiento: ${mascota.fechaNacimiento}", style = TextStyle(fontSize = 14.sp, fontFamily = FontFamily.Serif))
-            Text(text = "Edad: ${mascota.edad} años", style = TextStyle(fontSize = 14.sp, fontFamily = FontFamily.Serif))
-            Text(text = "Historia: ${mascota.historia}", style = TextStyle(fontSize = 14.sp, fontFamily = FontFamily.Serif))
-            Text(text = "Peso: ${mascota.peso} kg", style = TextStyle(fontSize = 14.sp, fontFamily = FontFamily.Serif))
-            Text(text = "Sexo: ${mascota.sexo}", style = TextStyle(fontSize = 14.sp, fontFamily = FontFamily.Serif))
-            Text(text = "Tutor: ${mascota.tutor}", style = TextStyle(fontSize = 14.sp, fontFamily = FontFamily.Serif))
+            // Puedes agregar más detalles aquí
         }
     }
 }
@@ -140,23 +135,4 @@ fun AddMascotaDialog(onDismiss: () -> Unit, onAdd: (Mascota) -> Unit) {
 @Composable
 fun MascotaListScreenPreview() {
     MascotaListScreen(onMascotaClick = {})
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MascotaItemPreview() {
-    MascotaItem(
-        mascota = Mascota(
-            nombre = "Enzo",
-            especie = "Perro",
-            raza = "Criollo",
-            fechaNacimiento = "14/02/2024",
-            edad = 10,
-            historia = "Rescatado de la calle en un día de lluvia",
-            peso = 3.5,
-            sexo = "Macho",
-            tutor = "Diana"
-        ),
-        onClick = {}
-    )
 }

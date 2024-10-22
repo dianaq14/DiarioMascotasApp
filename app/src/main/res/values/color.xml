@@ -3,6 +3,8 @@
     <color name="primary">#4CAF50</color> <!-- Verde esmeralda -->
     <color name="primary_variant">#388E3C</color> <!-- Verde más oscuro -->
     <color name="secondary">#03DAC5</color> <!-- Azul claro -->
+    <color name="button_background">#388E3C</color> <!-- Color del fondo del botón -->
+    <color name="button_text">#FFFFFF</color> <!-- Color del texto del botón -->
     <color name="background">#E0F2F1</color> <!-- Verde menta claro -->
     <color name="surface">#FFFFFF</color> <!-- Blanco -->
     <color name="on_primary">#FFFFFF</color>

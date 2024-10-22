@@ -11,8 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.diana.diariomascotasapp.data.repository.MascotaRepository
 import com.diana.diariomascotasapp.data.Repository.RecordatorioRepository
+import com.diana.diariomascotasapp.data.repository.MascotaRepository
 import com.diana.diariomascotasapp.ui.screen.HomeScreen
 import com.diana.diariomascotasapp.ui.screen.RecordatorioListScreen
 import com.diana.diariomascotasapp.ui.screen.WelcomeScreen
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         val mascotaRepository = MascotaRepository()
         val mascotaViewModelFactory = MascotaViewModelFactory(mascotaRepository)
 
-        val recordatorioRepository = RecordatorioRepository()
+        val recordatorioRepository = RecordatorioRepository() // Asegúrate de que esta línea sea correcta
         val recordatorioViewModelFactory = RecordatorioViewModelFactory(recordatorioRepository)
 
         setContent {

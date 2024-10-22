@@ -1,10 +1,13 @@
 package com.diana.diariomascotasapp.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,45 +21,141 @@ import com.diana.diariomascotasapp.data.model.Mascota
 @Composable
 fun MascotaDetailScreen(
     mascota: Mascota,
-    onEditClick: () -> Unit
+    onEditClick: () -> Unit,
+    onVeterinaryHistoryClick: () -> Unit,
+    onDietClick: () -> Unit
 ) {
+    // Fondo de la pantalla
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+            .background(Color(0xFF121212)) // Fondo color #121212
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
-        // Imagen de la mascota
-        mascota.fotoUri?.let {
-            Image(
-                painter = rememberImagePainter(it),
-                contentDescription = "Foto de la mascota",
-                modifier = Modifier
-                    .size(120.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop
-            )
-        } ?: Text("No hay foto disponible", modifier = Modifier.padding(16.dp))
+        // Card para la imagen de la mascota
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            backgroundColor = Color(0xFF1E1E1E), // Fondo de la Card (surface)
+            elevation = 4.dp
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                mascota.fotoUri?.let {
+                    Image(
+                        painter = rememberImagePainter(it),
+                        contentDescription = "Foto de la mascota",
+                        modifier = Modifier
+                            .size(160.dp)
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop
+                    )
+                } ?: Text(
+                    "No hay foto disponible",
+                    modifier = Modifier.padding(16.dp),
+                    color = Color.White // Texto blanco
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Nombre de la mascota
-        Text(text = mascota.nombre, style = MaterialTheme.typography.h5)
+        // Card para los detalles de la mascota
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color(0xFF1E1E1E), // Fondo de la Card (surface)
+            elevation = 4.dp
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(text = mascota.nombre, style = MaterialTheme.typography.h5, color = Color.White)
+                Spacer(modifier = Modifier.height(8.dp))
+                DetailRow(label = "Raza:", value = mascota.raza)
+                DetailRow(label = "Edad:", value = "${mascota.edad} años")
+                DetailRow(label = "Sexo:", value = mascota.sexo)
+                DetailRow(label = "Peso:", value = "${mascota.peso} kg")
+                DetailRow(label = "Fecha de nacimiento:", value = mascota.fechaNacimiento)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Botón para ver el historial veterinario
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color(0xFF1E1E1E), // Fondo de la Card (surface)
+            elevation = 4.dp
+        ) {
+            Button(
+                onClick = { onVeterinaryHistoryClick() },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(0xFF1A54AF), // Color del fondo del botón
+                    contentColor = Color.White // Color del texto del botón
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Ver Historial Veterinario")
+            }
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Detalles adicionales de la mascota
-        DetailRow(label = "Raza:", value = mascota.raza)
-        DetailRow(label = "Edad:", value = "${mascota.edad} años")
-        DetailRow(label = "Sexo:", value = mascota.sexo)
-        DetailRow(label = "Peso:", value = "${mascota.peso} kg")
-        DetailRow(label = "Fecha de nacimiento:", value = mascota.fechaNacimiento)
+        // Botón para ver el registro de dieta
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color(0xFF1E1E1E), // Fondo de la Card (surface)
+            elevation = 4.dp
+        ) {
+            Button(
+                onClick = { onDietClick() },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(0xFF1A54AF), // Color del fondo del botón
+                    contentColor = Color.White // Color del texto del botón
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Ver Registro de Dieta")
+            }
+        }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        // Botón para visitas veterinario
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            backgroundColor = Color(0xFF1E1E1E), // Fondo de la Card (surface)
+            elevation = 4.dp
+        ) {
+            Button(
+                onClick = { onDietClick() },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(0xFF1A54AF), // Color del fondo del botón
+                    contentColor = Color.White // Color del texto del botón
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Visitas Veterinario")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Botón para editar
-        Button(onClick = { onEditClick() }) {
+        Button(
+            onClick = { onEditClick() },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(0xFF1A54AF), // Color del fondo del botón
+                contentColor = Color.White // Color del texto del botón
+            ),
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text("Editar Información")
         }
     }
@@ -68,8 +167,8 @@ fun DetailRow(label: String, value: String) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = label, style = MaterialTheme.typography.body1, color = Color.Gray)
-        Text(text = value, style = MaterialTheme.typography.body1)
+        Text(text = label, style = MaterialTheme.typography.body1, color = Color(0xFFB0B0B0)) // Gris claro
+        Text(text = value, style = MaterialTheme.typography.body1, color = Color.White) // Blanco
     }
 }
 
@@ -89,7 +188,10 @@ fun MascotaDetailScreenPreview() {
             historia = "Regalo",
             tutor = "Diana"
         ),
-        onEditClick = {}
+        onEditClick = {},
+        onVeterinaryHistoryClick = {},
+        onDietClick = {}
     )
 }
+
 

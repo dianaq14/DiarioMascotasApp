@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#4CAF50</color>
-    <color name="primary_variant">#388E3C</color>
+    <color name="primary_variant">#1C491E</color>
     <color name="secondary">#03DAC5</color>
+    <color name="button_background">#1A54AF</color> <!-- Color del fondo del botón -->
+    <color name="button_text">#FFFFFF</color> <!-- Color del texto del botón -->
     <color name="background">#121212</color>
     <color name="surface">#1E1E1E</color>
     <color name="on_primary">#000000</color>

@@ -4,12 +4,12 @@ import com.diana.diariomascotasapp.data.model.Mascota
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
-class MascotaRepository {
+open class MascotaRepository {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val mascotasCollection = firestore.collection("mascotas")
 
-    suspend fun addMascota(mascota: Mascota) {
+    open suspend fun addMascota(mascota: Mascota) {
         try {
             mascotasCollection.add(mascota).await()
         } catch (e: Exception) {
@@ -17,7 +17,7 @@ class MascotaRepository {
         }
     }
 
-    suspend fun getMascotas(): List<Mascota> {
+    open suspend fun getMascotas(): List<Mascota> {
         return try {
             val snapshot = mascotasCollection.get().await()
             snapshot.documents.mapNotNull { document ->
@@ -29,7 +29,7 @@ class MascotaRepository {
         }
     }
 
-    suspend fun updateMascota(id: String, mascota: Mascota) {
+    open suspend fun updateMascota(id: String, mascota: Mascota) {
         try {
             mascotasCollection.document(id).set(mascota).await()
         } catch (e: Exception) {
@@ -37,7 +37,7 @@ class MascotaRepository {
         }
     }
 
-    suspend fun deleteMascota(id: String) {
+    open suspend fun deleteMascota(id: String) {
         try {
             mascotasCollection.document(id).delete().await()
         } catch (e: Exception) {

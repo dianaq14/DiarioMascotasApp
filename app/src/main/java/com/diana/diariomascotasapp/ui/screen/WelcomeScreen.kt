@@ -2,13 +2,17 @@ package com.diana.diariomascotasapp.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.content.contentReceiver
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,15 +63,22 @@ fun WelcomeScreen(onStartClick: () -> Unit) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
-                .wrapContentWidth()
+                .wrapContentWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF1A54AF), // Fondo verde del botón
+                contentColor = Color.White // Color del texto
+            ),
+            shape = RoundedCornerShape(16.dp) // Bordes redondeados de 16dp
         ) {
             Text(
                 text = "Empezar",
-                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp)
+                fontSize = 18.sp,
+                style = MaterialTheme.typography.displayMedium.copy(color = contentColor)// Tamaño de la letra
             )
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
